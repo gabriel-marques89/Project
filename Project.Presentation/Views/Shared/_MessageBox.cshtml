@@ -1,0 +1,23 @@
+﻿@using Project.Presentation.Models
+
+@{
+    var messages = TempData.ContainsKey(Message.TempDataKey) ? (List<Message>)TempData[Message.TempDataKey] : new List<Message>();
+
+    if (messages.Any())
+    {
+        @*<hr/>*@
+    }
+
+    foreach (var msg in messages)
+    {
+        var isDispensable = msg.IsDispensable ? "alert-dismissable" : null;
+
+        <div class="alert alert-@msg.Style @isDispensable">
+            @if (msg.IsDispensable)
+            {
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            }
+            @Html.Raw(msg.Content)
+        </div>
+    }
+}
